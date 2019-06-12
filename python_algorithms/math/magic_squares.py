@@ -13,13 +13,16 @@ class MagicSquare(object):
 
     description = attr.ib(repr=False)
 
-    constant = attr.ib(repr=False)
-
     square = attr.ib()
 
     def __init_subclass__(cls, **kwargs):
         super(MagicSquare, cls).__init_subclass__(**kwargs)
         MAGIC_SQUARES.append(cls())
+
+    @property
+    def constant(self):
+        n = self.square.shape[0]
+        return (n * (n ** 2 + 1)) // 2
 
     @property
     def is_semi_magic_square(self):
@@ -54,8 +57,6 @@ class LoShuSquare(MagicSquare):
     name = "Lo Shu Magic Square"
 
     description = __doc__
-
-    constant = 15
 
     square = np.array([
         [4, 9, 2],
@@ -94,8 +95,6 @@ class DuererSquare(MagicSquare):
     name = "Dürer's Magic Square"
 
     description = __doc__
-
-    constant = 34
 
     square = np.array([
         [16,  3,  2, 13],
@@ -141,8 +140,6 @@ class FranklinSquare(MagicSquare):
 
     description = __doc__
 
-    constant = 260
-
     square = np.array([
         [52, 61,  4, 13, 20, 29, 36, 45],
         [14,  3, 62, 51, 46, 35, 30, 19],
@@ -178,7 +175,7 @@ def decode(string, square):
 
 if __name__ == '__main__':
     for square in MAGIC_SQUARES:
-        print(square.description)
+        print(square.constant)
 
     string = 'THISISAMATHTEST.'
     square = DuererSquare()
