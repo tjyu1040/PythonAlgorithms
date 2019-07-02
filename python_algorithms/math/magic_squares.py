@@ -20,6 +20,14 @@ class MagicSquare(object):
         MAGIC_SQUARES.append(cls())
 
     @property
+    def size(self):
+        return self.square.size
+
+    @property
+    def shape(self):
+        return self.square.shape
+
+    @property
     def constant(self):
         n = self.square.shape[0]
         return (n * (n ** 2 + 1)) // 2
@@ -32,11 +40,11 @@ class MagicSquare(object):
 
     @property
     def is_gnomon_magic_square(self):
-        square = self.square
-        if square.shape != (4, 4):
+        if self.shape != (4, 4):
             return False
 
         # All 4 quadrants should sum up to the magic constant individually.
+        square = self.square
         quadrants = np.array([
             square[:2, :2],
             square[:2, 2:],
@@ -51,6 +59,54 @@ class MagicSquare(object):
         # magic constant.
         center_square = square[1:3, 1:3]
         return center_square.sum() == self.constant
+
+    @classmethod
+    def encode(cls, string, expand=False):
+        string_array = _parse_string(string)
+
+        magic_square = cls()
+        if string_array.size != magic_square.size:
+            raise ValueError(
+                f'Cannot encode string: string size ({string_array.size}) != '
+                f'magic square size ({magic_square.size})'
+            )
+
+        encoded_string_array = string_array[magic_square.square - 1]
+        if expand:
+            return encoded_string_array
+        return ''.join(np.ravel(encoded_string_array).tolist())
+
+    @classmethod
+    def decode(cls, string):
+        string_array = _parse_string(string)
+
+        magic_square = cls()
+        if string_array.size != magic_square.size:
+            raise ValueError(
+                f'Cannot decode string: string size ({string_array.size}) != '
+                f'magic square size ({magic_square.size})'
+            )
+
+        decoded_string_array = np.ravel(string_array)[magic_square.square - 1]
+        if string_array.ndim == 1:
+            return ''.join(np.ravel(decoded_string_array))
+        elif isinstance(string, np.ndarray):
+            return decoded_string_array
+        else:
+            return type(string)(decoded_string_array.tolist())
+
+
+def _parse_string(string):
+    supported_iterable_types = [list, tuple, np.ndarray]
+    if isinstance(string, str):
+        string_array = np.array(list(string))
+    elif any([
+        isinstance(string, obj_type) for obj_type in supported_iterable_types]
+    ):
+        string_array = np.array(string)
+    else:
+        raise TypeError(f'string must be a string or an iterable type: {type(string)}')
+    return string_array
 
 
 class LoShuSquare(MagicSquare):
@@ -170,34 +226,6 @@ class FranklinSquare(MagicSquare):
     ])
 
 
-def encode(string, square):
-    if isinstance(string, str):
-        string_array = np.array(list(string))
-    else:
-        raise TypeError()
-    if string_array.size != square.size:
-        raise ValueError('Cannot be encoded.')
-    return string_array[square - 1]
-
-
-def decode(string, square):
-    if isinstance(string, str):
-        string_array = np.array(list(string))
-    else:
-        raise TypeError()
-
-    if string_array.size != square.size:
-        raise ValueError('Cannot be decoded.')
-    return np.ravel(string_array)[square - 1]
-
-
 if __name__ == '__main__':
     for square in MAGIC_SQUARES:
         print(square)
-
-    string = 'THISISAMATHTEST.'
-    square = DuererSquare()
-
-    # encoded = encode(string, square.square)
-    # decoded = decode(''.join(np.ravel(encoded).tolist()), square.square)
-    # print(''.join(np.ravel(encoded)))
