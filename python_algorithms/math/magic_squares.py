@@ -32,7 +32,25 @@ class MagicSquare(object):
 
     @property
     def is_gnomon_magic_square(self):
-        raise NotImplementedError()
+        square = self.square
+        if square.shape != (4, 4):
+            return False
+
+        # All 4 quadrants should sum up to the magic constant individually.
+        quadrants = np.array([
+            square[:2, :2],
+            square[:2, 2:],
+            square[2:, :2],
+            square[2:, 2:]
+        ])
+        for quadrant in quadrants:
+            if quadrant.sum() != self.constant:
+                return False
+
+        # The sum of the middle four numbers in the square should sum up to the
+        # magic constant.
+        center_square = square[1:3, 1:3]
+        return center_square.sum() == self.constant
 
 
 class LoShuSquare(MagicSquare):
@@ -175,11 +193,11 @@ def decode(string, square):
 
 if __name__ == '__main__':
     for square in MAGIC_SQUARES:
-        print(square.constant)
+        print(square)
 
     string = 'THISISAMATHTEST.'
     square = DuererSquare()
 
-    #encoded = encode(string, square.square)
-    #decoded = decode(''.join(np.ravel(encoded).tolist()), square.square)
-    #print(''.join(np.ravel(encoded)))
+    # encoded = encode(string, square.square)
+    # decoded = decode(''.join(np.ravel(encoded).tolist()), square.square)
+    # print(''.join(np.ravel(encoded)))
