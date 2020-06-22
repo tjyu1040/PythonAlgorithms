@@ -6,6 +6,10 @@ def fibonacci_number(n: int) -> int:
     """
     Generate the n-th term of the `Fibonacci sequence <https://en.wikipedia.org/wiki/Fibonacci_number>`_.
 
+    :param n: The n-th term to compute.
+    :return: The n-th Fibonacci number.
+
+    :Example:
     >>> fibonacci_number(0)
     0
     >>> fibonacci_number(1)
@@ -16,9 +20,6 @@ def fibonacci_number(n: int) -> int:
     2
     >>> fibonacci_number(10)
     55
-
-    :param n: The n-th term to compute.
-    :return: The n-th Fibonacci number.
     """
     if n < 0:
         raise ValueError(f'Nth term must be a non-negative integer number, got {n}')
