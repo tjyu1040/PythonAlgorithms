@@ -23,17 +23,12 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/setup.py') }}
           restore-keys: |
             ${{ runner.os }}-pip-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 flake8-docstrings mypy pytest pytest-cov
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Lint with flake8
-        run: flake8
-      - name: Check static typing with mypy
-        run: mypy .
-      - name: Test with pytest
-        run: pytest
+          pip install tox
+      - name: Run Tox
+        run: tox run -e mypy,flake8,py
