@@ -11,5 +11,8 @@ setup(
                 ' for practice purposes.',
     long_description=long_description,
     packages=find_packages(exclude=('tests', 'docs')),
-    python_requires='>=3.6'
+    python_requires='>=3.6',
+    install_requires=[
+        'numpy>=1.18.5'
+    ]
 )

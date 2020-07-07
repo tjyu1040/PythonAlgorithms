@@ -1,5 +1,8 @@
 from types import GeneratorType
+from typing import List
 import unittest
+
+from numpy.testing import assert_array_equal
 
 from python_algorithms.sequences import fibonacci_number, fibonacci_sequence
 
@@ -17,20 +20,20 @@ class TestSequences(unittest.TestCase):
 
         sequence = fibonacci_sequence(0)
         self.assertIsInstance(sequence, GeneratorType)
-        expected_sequence = []
-        self.assertListEqual(expected_sequence, list(sequence))
+        expected_sequence = []  # type: List[int]
+        assert_array_equal(expected_sequence, list(sequence))
 
         sequence = fibonacci_sequence(1)
         self.assertIsInstance(sequence, GeneratorType)
         expected_sequence = [0]
-        self.assertListEqual(expected_sequence, list(sequence))
+        assert_array_equal(expected_sequence, list(sequence))
 
         sequence = fibonacci_sequence(5)
         self.assertIsInstance(sequence, GeneratorType)
         expected_sequence = [0, 1, 1, 2, 3]
-        self.assertListEqual(expected_sequence, list(sequence))
+        assert_array_equal(expected_sequence, list(sequence))
 
         sequence = fibonacci_sequence(10)
         self.assertIsInstance(sequence, GeneratorType)
         expected_sequence = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
-        self.assertListEqual(expected_sequence, list(sequence))
+        assert_array_equal(expected_sequence, list(sequence))
