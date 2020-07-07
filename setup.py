@@ -1,4 +1,5 @@
-from setuptools import setup, find_packages
+"""Setup configuration."""
+from setuptools import setup, find_packages  # type: ignore
 
 with open('README.md', 'r') as fp:
     long_description = fp.read()
@@ -9,5 +10,9 @@ setup(
     description='Package containing data structures, algorithms, and mathematics examples'
                 ' for practice purposes.',
     long_description=long_description,
-    packages=find_packages(exclude=('tests', 'docs'))
+    packages=find_packages(exclude=('tests', 'docs')),
+    python_requires='>=3.6',
+    install_requires=[
+        'numpy>=1.18.5'
+    ]
 )
