@@ -4,13 +4,13 @@ __all__ = ['Comparable']
 from abc import abstractmethod
 from typing import Any, TypeVar
 import sys
+
 if sys.version_info < (3, 8):
     from typing_extensions import Protocol
 else:
     from typing import Protocol
 
 Comparable = TypeVar("Comparable", bound="ComparableProtocol")
-
 
 class ComparableProtocol(Protocol):
     @abstractmethod

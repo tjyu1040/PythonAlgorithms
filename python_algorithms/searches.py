@@ -1,12 +1,8 @@
 """Module containing search algorithms."""
 __all__ = ['binary_search']
 
-from typing import Sequence
 
-from python_algorithms.typing import Comparable
-
-
-def binary_search(array: Sequence[Comparable], item: Comparable) -> int:
+def binary_search(array, item):
     """
     Search for an item in a sorted array using binary search algorithms.
 
@@ -36,5 +32,5 @@ def binary_search(array: Sequence[Comparable], item: Comparable) -> int:
     return -1
 
 
-def is_sorted(array: Sequence[Comparable]) -> bool:
-    return all(array[i] <= array[i+1] for i in range(len(array)-1))
+def is_sorted(array):
+    return all(array[i] <= array[i + 1] for i in range(len(array) - 1))
