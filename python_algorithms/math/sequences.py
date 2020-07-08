@@ -1,6 +1,6 @@
 """Module containing algorithms involved with generating mathematical sequences."""
 __all__ = [
-    'fibonacci_number', 'fibonacci'
+    'fibonacci_number', 'fibonacci', 'collatz'
 ]
 
 from typing import Iterator
@@ -66,3 +66,32 @@ def fibonacci(length: int) -> Iterator[int]:
         yield fib_value
         a = b
         b = fib_value
+
+
+def collatz(n: int) -> Iterator[int]:
+    """
+    Generate a Collatz sequence starting from a given integer.
+
+    The `Collatz conjecture <https://en.wikipedia.org/wiki/Collatz_conjecture>`_ is
+    defined as:
+
+    Start with any positive integer n. Then each term is obtained from the previous
+    term as follows:
+
+    - If the previous term is even, the next term is one half of the previous term.
+    - If the previous term is odd, the next term is 3 times the previous term plus 1.
+
+    The conjecture is that no matter what value of n, the sequence will always reach 1.
+
+    :param n: Positive integer.
+    :return: Iterator of the Collatz sequence starting with n.
+    """
+    if n < 1:
+        raise ValueError(f'n must be a positive integer: {n!r}')
+    yield n
+    while n > 1:
+        if n % 2 == 0:
+            n = n // 2
+        else:
+            n = 3 * n + 1
+        yield n

@@ -4,7 +4,9 @@ import unittest
 
 from numpy.testing import assert_array_equal
 
-from python_algorithms.math.sequences import fibonacci_number, fibonacci
+from python_algorithms.math.sequences import (
+    fibonacci_number, fibonacci, collatz
+)
 
 
 class TestSequences(unittest.TestCase):
@@ -36,4 +38,12 @@ class TestSequences(unittest.TestCase):
         sequence = fibonacci(10)
         self.assertIsInstance(sequence, GeneratorType)
         expected_sequence = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+        assert_array_equal(expected_sequence, list(sequence))
+
+    def test_collatz(self):
+        with self.assertRaises(ValueError):
+            next(collatz(0))
+
+        sequence = collatz(12)
+        expected_sequence = [12, 6, 3, 10, 5, 16, 8, 4, 2, 1]
         assert_array_equal(expected_sequence, list(sequence))
