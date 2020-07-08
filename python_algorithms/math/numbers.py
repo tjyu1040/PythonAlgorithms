@@ -33,7 +33,7 @@ def gcd(*integers: int) -> int:
         raise ValueError('integers must not be empty')
 
     if not is_integer(*integers):
-        raise TypeError(f'invalid integers found: {integers!r}')
+        raise TypeError(f'invalid integer types found: {integers!r}')
 
     def _gcd(a: int, b: int) -> int:
         a, b = abs(a), abs(b)
@@ -73,7 +73,7 @@ def lcm(*integers: int) -> int:
         raise ValueError('integers must not be empty')
 
     if not is_integer(*integers):
-        raise TypeError(f'invalid integers found: {integers!r}')
+        raise TypeError(f'invalid integer types found: {integers!r}')
 
     def _lcd(a: int, b: int) -> int:
         if a == 0 and b == 0:
