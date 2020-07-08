@@ -1,4 +1,8 @@
-"""Module containing algorithms involved with generating sequences."""
+"""Module containing algorithms involved with generating mathematical sequences."""
+__all__ = [
+    'fibonacci_number', 'fibonacci_sequence'
+]
+
 from typing import Iterator
 
 

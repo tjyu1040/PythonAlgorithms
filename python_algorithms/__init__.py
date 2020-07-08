@@ -1,1 +1,1 @@
-"""Module containing algorithms."""
+"""Module containing algorithms and data structures."""

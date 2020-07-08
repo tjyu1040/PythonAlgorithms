@@ -4,7 +4,7 @@ import unittest
 
 from numpy.testing import assert_array_equal
 
-from python_algorithms.sequences import fibonacci_number, fibonacci_sequence
+from python_algorithms.math.sequences import fibonacci_number, fibonacci_sequence
 
 
 class TestSequences(unittest.TestCase):
