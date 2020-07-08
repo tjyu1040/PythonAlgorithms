@@ -1,6 +1,6 @@
 """Module containing algorithms involved with generating mathematical sequences."""
 __all__ = [
-    'fibonacci_number', 'fibonacci_sequence'
+    'fibonacci_number', 'fibonacci'
 ]
 
 from typing import Iterator
@@ -8,10 +8,10 @@ from typing import Iterator
 
 def fibonacci_number(n: int) -> int:
     """
-    Generate the n-th term of the `Fibonacci sequence <https://en.wikipedia.org/wiki/Fibonacci_number>`_.
+    Generate the n-th term number of the `Fibonacci sequence <https://en.wikipedia.org/wiki/Fibonacci_number>`_.
 
-    :param n: The n-th term to compute.
-    :return: The n-th Fibonacci number.
+    :param n: The n-th Fibonacci term number to compute.
+    :return: The n-th Fibonacci term number.
 
     :Example:
     >>> fibonacci_number(0)
@@ -26,7 +26,7 @@ def fibonacci_number(n: int) -> int:
     55
     """
     if n < 0:
-        raise ValueError(f'Nth term must be a non-negative integer number, got {n}')
+        raise ValueError(f'n must be a non-negative integer number: {n}')
 
     a, b = 0, 1
     if n == 0:
@@ -45,7 +45,7 @@ def fibonacci_number(n: int) -> int:
     return fib_value
 
 
-def fibonacci_sequence(length: int) -> Iterator[int]:
+def fibonacci(length: int) -> Iterator[int]:
     """
     Generate the `Fibonacci sequence <https://en.wikipedia.org/wiki/Fibonacci_number>`_.
 
@@ -53,7 +53,7 @@ def fibonacci_sequence(length: int) -> Iterator[int]:
     :return: Iterator of the Fibonacci sequence.
     """
     if length < 0:
-        raise ValueError(f'Length must be a non-negative number, got {length}')
+        raise ValueError(f'length must be a non-negative number, got {length}')
 
     a, b = 0, 1
     if length >= 1:
