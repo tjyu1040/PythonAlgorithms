@@ -32,3 +32,8 @@ jobs:
           pip install tox
       - name: Run Tox
         run: tox run -e mypy,flake8,py
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v1
+        with:
+          name: coverage-html-report-${{ matrix.python-version }}
+          path: htmlcov/
