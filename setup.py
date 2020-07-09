@@ -11,8 +11,10 @@ setup(
                 ' for practice purposes.',
     long_description=long_description,
     packages=find_packages(exclude=('tests', 'docs')),
+    package_data={'python_algorithms': ['py.typed']},
     python_requires='>=3.6',
     install_requires=[
-        'numpy>=1.18.5'
+        'numpy>=1.18.5',
+        'typing-extensions;python_version<"3.8"'
     ]
 )
