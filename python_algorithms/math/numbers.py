@@ -3,6 +3,8 @@ __all__ = ['gcd', 'lcm']
 
 from functools import reduce
 
+import numpy as np
+
 
 def gcd(*integers: int) -> int:
     """
@@ -84,4 +86,4 @@ def lcm(*integers: int) -> int:
 
 
 def is_integer(*integers: int) -> bool:
-    return all([isinstance(i, int) for i in integers])
+    return all([isinstance(i, (int, np.integer)) for i in integers])
